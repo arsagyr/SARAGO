@@ -5,8 +5,8 @@ import "fmt"
 type DRV struct {
 	size int
 	// probabilities []Fraction
-	probabilities []float32
 	values        []float32
+	probabilities []float32
 }
 
 func BuildDRV(n int, ar1 []float32, ar2 []float32) DRV {
@@ -16,6 +16,26 @@ func BuildDRV(n int, ar1 []float32, ar2 []float32) DRV {
 		values:        ar2,
 	}
 	return drv
+}
+
+func CleanDRV(drv DRV) DRV {
+	var ar1 []float32 
+	var ar2 []float32 
+	var n int = 0
+	for i := 0; i < drv.size; i++ {
+		
+		if drv.probabilities[i] != 0 {		
+			ar1 = append(ar1, drv.values[i]) 
+			ar2 = append(ar2, drv.probabilities[i])
+			n++
+		}
+	}
+
+	return DRV{
+		size:          n,
+		values:        ar1,
+		probabilities: ar2,
+	}
 }
 
 func PrintDRV(drv DRV) {
@@ -46,23 +66,117 @@ func Variation(drv DRV) float32 {
 }
 
 func sumDRV(drv1 DRV, drv2 DRV) DRV {
-
-	ar1 []float32  drv1.size * drv2.size
-	ar2 []float32 drv1.size * drv2.size
-
+	var ar1 []float32 
+	var ar2 []float32 
 	var k int = 0
 	for i := 0; i < drv1.size; i++ {
 		for j := 0; j < drv2.size; j++ {
-			ar1[k] = drv1.values[i] + drv2.values[j]
-			ar2[k] = drv1.probabilities[i] * drv2.probabilities[j]
+			ar1 = append( ar1, drv1.values[i] + drv2.values[j])
+			ar2 = append( ar2, drv1.probabilities[i] * drv2.probabilities[j])
 			k = k + 1
+		}
+	}
+	for i := 0; i < k; i++ {
+		for j := i + 1; j < k; j++ {
+			if ar1[i] == ar1 [j] {
+				ar2[i] = ar2[i] + ar2[j]
+				ar2[j] = 0
+			}
 		}
 	}
 	var drv = DRV{
 		size:          k,
-		probabilities: ar1,
-		values:        ar2,
+		probabilities: ar2,
+		values:        ar1,
 	}
+	drv = CleanDRV( drv )
+	
+	return drv
+}
+
+func subtractionDRV(drv1 DRV, drv2 DRV) DRV {
+	var ar1 []float32 
+	var ar2 []float32 
+	var k int = 0
+	for i := 0; i < drv1.size; i++ {
+		for j := 0; j < drv2.size; j++ {
+			ar1 = append( ar1, drv1.values[i] - drv2.values[j])
+			ar2 = append( ar2, drv1.probabilities[i] * drv2.probabilities[j])
+			k = k + 1
+		}
+	}
+	for i := 0; i < k; i++ {
+		for j := i + 1; j < k; j++ {
+			if ar1[i] == ar1 [j] {
+				ar2[i] = ar2[i] + ar2[j]
+				ar2[j] = 0
+			}
+		}
+	}
+	var drv = DRV{
+		size:          k,
+		probabilities: ar2,
+		values:        ar1,
+	}
+	drv = CleanDRV( drv )
+	
+	return drv
+}
+
+func productDRV(drv1 DRV, drv2 DRV) DRV {
+	var ar1 []float32 
+	var ar2 []float32 
+	var k int = 0
+	for i := 0; i < drv1.size; i++ {
+		for j := 0; j < drv2.size; j++ {
+			ar1 = append( ar1, drv1.values[i] * drv2.values[j])
+			ar2 = append( ar2, drv1.probabilities[i] * drv2.probabilities[j])
+			k = k + 1
+		}
+	}
+	for i := 0; i < k; i++ {
+		for j := i + 1; j < k; j++ {
+			if ar1[i] == ar1 [j] {
+				ar2[i] = ar2[i] + ar2[j]
+				ar2[j] = 0
+			}
+		}
+	}
+	var drv = DRV{
+		size:          k,
+		probabilities: ar2,
+		values:        ar1,
+	}
+	drv = CleanDRV( drv )
+	
+	return drv
+}
+
+func ratioDRV(drv1 DRV, drv2 DRV) DRV {
+	var ar1 []float32 
+	var ar2 []float32 
+	var k int = 0
+	for i := 0; i < drv1.size; i++ {
+		for j := 0; j < drv2.size; j++ {
+			ar1 = append( ar1, drv1.values[i] / drv2.values[j])
+			ar2 = append( ar2, drv1.probabilities[i] * drv2.probabilities[j])
+			k = k + 1
+		}
+	}
+	for i := 0; i < k; i++ {
+		for j := i + 1; j < k; j++ {
+			if ar1[i] == ar1 [j] {
+				ar2[i] = ar2[i] + ar2[j]
+				ar2[j] = 0
+			}
+		}
+	}
+	var drv = DRV{
+		size:          k,
+		probabilities: ar2,
+		values:        ar1,
+	}
+	drv = CleanDRV( drv )
 	
 	return drv
 }
