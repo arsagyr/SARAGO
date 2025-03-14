@@ -65,7 +65,7 @@ func Variation(drv DRV) float32 {
 	return v - ( ev * ev )
 }
 
-func sumDRV(drv1 DRV, drv2 DRV) DRV {
+func SumDRV(drv1 DRV, drv2 DRV) DRV {
 	var ar1 []float32 
 	var ar2 []float32 
 	var k int = 0
@@ -94,7 +94,7 @@ func sumDRV(drv1 DRV, drv2 DRV) DRV {
 	return drv
 }
 
-func subtractionDRV(drv1 DRV, drv2 DRV) DRV {
+func SubtractionDRV(drv1 DRV, drv2 DRV) DRV {
 	var ar1 []float32 
 	var ar2 []float32 
 	var k int = 0
@@ -123,7 +123,7 @@ func subtractionDRV(drv1 DRV, drv2 DRV) DRV {
 	return drv
 }
 
-func productDRV(drv1 DRV, drv2 DRV) DRV {
+func ProductDRV(drv1 DRV, drv2 DRV) DRV {
 	var ar1 []float32 
 	var ar2 []float32 
 	var k int = 0
@@ -152,7 +152,7 @@ func productDRV(drv1 DRV, drv2 DRV) DRV {
 	return drv
 }
 
-func ratioDRV(drv1 DRV, drv2 DRV) DRV {
+func RatioDRV(drv1 DRV, drv2 DRV) DRV {
 	var ar1 []float32 
 	var ar2 []float32 
 	var k int = 0
