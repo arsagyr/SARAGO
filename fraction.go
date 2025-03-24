@@ -4,39 +4,44 @@ import "fmt"
 
 // Структура типа "Fraction" - "Дробь"
 type Fraction struct {
-	numinator   int // Числитель
+	numerator   int // Числитель
 	denominator int // Знаменатель
 }
 
-func Print(f Fraction){
-	fmt.Print(f.numinator)
+// Метод для создания новой дроби
+func NewFraction(a int, b int) Fraction {
+	return Fraction{
+		numerator:   a,
+		denominator: b,
+	}
+}
+
+// Метод для печати дроби
+func (f Fraction) Print() {
+	fmt.Print(f.numerator)
 	fmt.Print("/")
 	fmt.Print(f.denominator)
 }
 
-func Println(f Fraction){
-	fmt.Print(f.numinator)
+// Метод для печати дроби с новой строки
+func (f Fraction) Println() {
+	fmt.Print(f.numerator)
 	fmt.Print("/")
 	fmt.Println(f.denominator)
 }
 
-func Fraction(a int, b int) Fraction {
+// Метод для умножения дроби на целое число
+func (f Fraction) MultiplyByInt(a int) Fraction {
 	return Fraction{
-		numinator   a,
-		denominator b,
+		numerator:   a * f.numerator,
+		denominator: f.denominator,
 	}
 }
 
-func Fraction(a int, b Fraction) Fraction {
+// Метод для умножения дроби на другую дробь
+func (f Fraction) MultiplyByFraction(b Fraction) Fraction {
 	return Fraction{
-		numinator   a * b.denominator,
-		denominator b.numinator,
-	}
-}
-
-func Fraction(a Fraction, b int) Fraction {
-	return Fraction{
-		numinator   a.numinator,
-		denominator b * a.denominator,
+		numerator:   f.numerator * b.numerator,
+		denominator: f.denominator * b.denominator,
 	}
 }
