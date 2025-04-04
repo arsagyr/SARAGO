@@ -1,3 +1,3 @@
-module github.com/arsagyr/GOZina
+module github.com/arsagyr/SARAGO
 
 go 1.23.3
