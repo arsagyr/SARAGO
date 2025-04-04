@@ -1,4 +1,4 @@
-package main
+package fraction
 
 import (
 	"fmt"
@@ -121,6 +121,7 @@ func (f Fraction) SumByInt(a int) Fraction {
 		denominator: f.denominator,
 	}
 }
+
 // Метод для суммирования дроби на другую дробь
 func (f1 Fraction) SumByFraction(f2 Fraction) Fraction {
 	var a, b int
