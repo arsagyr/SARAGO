@@ -1,3 +1,3 @@
-module GOZina
+module github.com/arsagyr/GOZina
 
-go 1.23.7
+go 1.23.3
