@@ -121,7 +121,6 @@ func (f Fraction) SumByInt(a int) Fraction {
 		denominator: f.denominator,
 	}
 }
-
 // Метод для суммирования дроби на другую дробь
 func (f1 Fraction) SumByFraction(f2 Fraction) Fraction {
 	var a, b int
@@ -193,6 +192,10 @@ func (f Fraction) ToFloat64() float64 {
 
 func (f Fraction) ToComplex128() complex128 {
 	return complex(float64(f.numerator), float64(f.denominator))
+}
+
+func (f Fraction) ToInt() int {
+	return int(f.numerator / f.denominator)
 }
 
 // Метод для конвертации дроби в строковый формат
