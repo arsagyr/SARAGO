@@ -9,7 +9,12 @@ type Fraction struct {
 	numerator   int // Числитель
 	denominator int // Знаменатель
 }
-
+func (f Fraction) GetNumerator() int {
+	return f.numerator
+}
+func (f *Fraction) SetNumerator(a int ){ 
+	f.numerator = a
+}
 // Метод для создания новой дроби
 func NewFraction(a int, b int) Fraction {
 	//! Добавил проверку на нуль
@@ -140,17 +145,17 @@ func (f1 Fraction) SumByFraction(f2 Fraction) Fraction {
 
 // Метод сравнения, где дробь f меньше числа a
 func (f Fraction) IsSmallerThanINT(a int) bool {
-	return f.numerator < a*f.denominator
+	return f.numerator < (a*f.denominator)
 }
 
 // Метод сравнения, где дробь f больше числа a
 func (f Fraction) IsBiggerThanINT(a int) bool {
-	return f.numerator > a*f.denominator
+	return f.numerator > (a*f.denominator)
 }
 
 // Метод сравнения, где дробь f равна числу a
 func (f Fraction) IsEqualToINT(a int) bool {
-	return f.numerator == a*f.denominator
+	return f.numerator == (a*f.denominator)
 }
 
 // Метод сравнения, где дробь f1 меньше дроби f2
@@ -190,11 +195,12 @@ func (f1 Fraction) IsEqualToFraction(f2 Fraction) bool {
 func (f Fraction) ToFloat64() float64 {
 	return float64(f.numerator) / float64(f.denominator)
 }
-
+func (f Fraction) ToFloat32() float32 {
+	return float32(f.numerator) / float32(f.denominator)
+}
 func (f Fraction) ToComplex128() complex128 {
 	return complex(float64(f.numerator), float64(f.denominator))
 }
-
 func (f Fraction) ToInt() int {
 	return int(f.numerator / f.denominator)
 }
