@@ -47,14 +47,27 @@ func CleanDRV(drv DRV) DRV {
 	}
 }
 
-func (drv DRV) PrintDRV(){
+func (drv DRV) Print(){
+	n := drv.size -1
+	for i := 0; i < n; i++ {
+		fmt.Print(drv.values[i])
+		fmt.Print(" - ")
+		drv.probabilities[i].Print()
+		fmt.Print(", ")
+	}
+	fmt.Print(drv.values[n])
+	fmt.Print(" - ")
+	drv.probabilities[n].Print()
+}
+func (drv DRV) Println(){
 	for i := 0; i < drv.size; i++ {
 		fmt.Print(drv.values[i])
 		fmt.Print(" - ")
 		drv.probabilities[i].Println()
 	}
-	
 }
+
+
 
 func ExpectedValueFloat32(drv DRV) float32 {
 	var ev float32 = 0
