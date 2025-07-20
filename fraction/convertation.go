@@ -71,8 +71,8 @@ func (f Fraction64) ToFloat64() float64 {
 func (f Fraction64) ToComplex128() complex128 {
 	return complex(float64(f.numerator), float64(f.denominator))
 }
-func (f Fraction64) ToInt64() int {
-	return int(f.numerator / f.denominator)
+func (f Fraction64) ToInt64() int64 {
+	return int64(f.numerator / f.denominator)
 }
 
 // Метод для конвертации дроби в строковый формат

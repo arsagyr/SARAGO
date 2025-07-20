@@ -1,9 +1,5 @@
 package fraction
 
-import (
-	"fmt"
-)
-
 // Структура типа "Fraction" - "Дробь"
 type Fraction struct {
 	numerator   int // Числитель
@@ -50,20 +46,6 @@ func (f Fraction64) GetDenominator() int64 {
 	return f.denominator
 }
 
-// Метод для печати дроби
-func (f Fraction) Print() {
-	fmt.Print(f.numerator)
-	fmt.Print("/")
-	fmt.Print(f.denominator)
-}
-
-// Метод для печати дроби с новой строки
-func (f Fraction) Println() {
-	fmt.Print(f.numerator)
-	fmt.Print("/")
-	fmt.Println(f.denominator)
-}
-
 // Метод упрощения дроби путем нахождения НОД с помощью алгоритма Евклида
 func (f Fraction) Simplification() Fraction {
 	var m, n, r int
@@ -81,6 +63,47 @@ func (f Fraction) Simplification() Fraction {
 		r = m % n
 	}
 	return Fraction{
+		denominator: f.denominator / n,
+		numerator:   f.numerator/n + f.denominator*i,
+	}
+}
+
+func (f Fraction32) Simplification() Fraction32 {
+	var m, n, r int32
+	var i int32 = 0
+	m = f.numerator
+	n = f.denominator
+	if m > n {
+		i = m / n
+		m = m % n
+	}
+	r = m % n
+	for r != 0 {
+		m = n
+		n = r
+		r = m % n
+	}
+	return Fraction32{
+		denominator: f.denominator / n,
+		numerator:   f.numerator/n + f.denominator*i,
+	}
+}
+func (f Fraction64) Simplification() Fraction64 {
+	var m, n, r int64
+	var i int64 = 0
+	m = f.numerator
+	n = f.denominator
+	if m > n {
+		i = m / n
+		m = m % n
+	}
+	r = m % n
+	for r != 0 {
+		m = n
+		n = r
+		r = m % n
+	}
+	return Fraction64{
 		denominator: f.denominator / n,
 		numerator:   f.numerator/n + f.denominator*i,
 	}
