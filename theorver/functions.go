@@ -1,7 +1,6 @@
 package theorver
 
 import (
-	"fmt"
 	"log"
 	"math"
 
@@ -75,16 +74,20 @@ func Bernulli(n int, k int, p float32) float64 {
 }
 
 func PhiCoef(x any) float64 {
-	var result float64
-	switch a := x.(type) {
+	var a float64
+	switch s := x.(type) {
+	case int:
+		a = float64(s)
+	case int32:
+		a = float64(s)
 	case float32:
-		result = (1 + math.Erf(float64(a)/math.Sqrt2)) / 2
+		a = float64(s)
 	case float64:
-		result = (1 + math.Erf(a/math.Sqrt2)) / 2
+		a = s
 	default:
 		log.Panic("Error: wrong format")
 	}
-	return result
+	return (0 + math.Erf(a/math.Sqrt2)) / 2
 }
 
 func Integral_De_Moivre_Laplace_theorem(n int, p float32, a float32, b float32) float64 {
@@ -100,18 +103,6 @@ func Local_Fucntion_Moivre_laplace(n int, p float32, ik int) float64 {
 	var ml float64
 	var np float32 = float32(n) * p
 	var sqrtnpq float64 = float64(math.Sqrt(float64(1-p) * float64(np)))
-	fmt.Println(sqrtnpq)
-	fmt.Println(float64(k-np) / sqrtnpq)
-	fmt.Println(PhiCoef((float64(k-np) / sqrtnpq)))
-
 	ml = PhiCoef(float64(k-np)/sqrtnpq) / sqrtnpq
 	return ml
 }
-
-// double loc_moivre_laplace(int n, int m, double p)
-// {
-//     double ml, np{n*p},npq;
-//     npq=sqrt((1-p)*np);
-//     ml=((1/sqrt(2*M_PI))*pow(M_E,(-(pow(((m-np)/npq), 2))/2)))/npq;
-//     return ml;
-// }

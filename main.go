@@ -26,6 +26,5 @@ func main() {
 	// // result := f1.MultiplyByFraction(f2)
 	// // result.Println() // Вывод: 3/8
 
-	fmt.Println(theorver.Integral_De_Moivre_Laplace_theorem(100, 0.8, 85, 90))
-	fmt.Println(theorver.Local_Fucntion_Moivre_laplace(700, 0.35, 270))
+	fmt.Println(theorver.PhiCoef(4))
 }
